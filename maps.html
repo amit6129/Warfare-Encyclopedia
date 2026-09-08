@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campaign Maps & Atlas — March of Empire</title>
+<meta name="description" content="Interactive campaign maps showing battle sites, empire boundaries and campaign routes across all historical eras.">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="chrome-top"></div>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a> / Campaign Maps & Atlas</div>
+      <span class="eyebrow">Battlefield Atlas</span>
+      <h1 class="display">Campaign Maps</h1>
+      <p>Explore campaign routes, battle sites, fort locations and empire boundaries across all historical eras — from Alexander's march through Persia to the beaches of Normandy.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid" style="gap:2rem;" id="mapsGrid"></div>
+    </div>
+  </section>
+</main>
+
+<div id="chrome-footer"></div>
+
+<script src="js/data-battles.js"></script>
+<script src="js/data-operations.js"></script>
+<script src="js/data-leaders.js"></script>
+<script src="js/data-weapons.js"></script>
+<script src="js/data-countries.js"></script>
+<script src="js/data-timeline.js"></script>
+<script src="js/data-resources.js"></script>
+<script src="js/data-forts.js"></script>
+<script src="js/data-maps.js"></script>
+<script src="js/chrome.js"></script>
+<script>
+document.addEventListener('chrome:ready', ()=>{
+  const grid = document.getElementById('mapsGrid');
+  if(!grid || typeof MAPS_DATA === 'undefined') return;
+
+  const eraColors = { ancient: '#8B6914', maratha: '#CD7F32', napoleonic: '#4A6741', wwii: '#B23A2E' };
+
+  grid.innerHTML = MAPS_DATA.map(m => {
+    const color = eraColors[m.era] || '#C7A254';
+    const eraLabel = m.era === 'ancient' ? 'Ancient & Classical' : m.era === 'maratha' ? 'Maratha Empire' : m.era === 'napoleonic' ? 'Napoleonic Era' : m.era === 'wwii' ? 'World War II' : m.era;
+    
+    return `
+    <div class="card reveal" id="${m.id}" style="overflow:hidden;">
+      <div style="height:8px; background:linear-gradient(90deg, ${color}, ${color}88);"></div>
+      <div style="padding:1.8rem;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:.8rem; margin-bottom:1rem;">
+          <div>
+            <span style="font-family:var(--font-mono); font-size:.65rem; color:${color}; text-transform:uppercase; letter-spacing:.1em;">${eraLabel} · ${m.category}</span>
+            <h2 style="font-size:1.3rem; margin:.3em 0;">${m.name}</h2>
+          </div>
+        </div>
+        <p style="font-size:.92rem; margin-bottom:1.4rem;">${m.description}</p>
+        
+        <h3 style="font-size:.82rem; color:var(--brass-deep); text-transform:uppercase; letter-spacing:.06em; margin-bottom:.8em;">Key Locations</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:.6rem;">
+          ${m.keyLocations.map(loc => `
+            <div style="padding:.7rem .9rem; background:var(--parchment-dim); border-radius:var(--radius-sm); border-left:3px solid ${color};">
+              <span style="font-family:var(--font-head); font-weight:700; font-size:.88rem; display:block;">${loc.name}</span>
+              <span style="font-family:var(--font-mono); font-size:.72rem; color:var(--steel);">${loc.desc}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  WW2_UI.initReveal();
+});
+</script>
+</body>
+</html>

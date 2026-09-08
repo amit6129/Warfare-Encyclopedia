@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Battles Encyclopedia — March of Empire</title>
+<meta name="description" content="A comprehensive, searchable encyclopedia of battles across all historical eras — from Alexander the Great through the World Wars, with a battle comparison tool.">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="chrome-top"></div>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a> / Battles</div>
+      <span class="eyebrow">Field Archive</span>
+      <h1 class="display">Battles Encyclopedia</h1>
+      <p>Search and filter <strong id="battleCountTotal"></strong> major battles and engagements across <strong>3,000+ years of history</strong> — from the phalanxes of Macedon to the beaches of Normandy.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:2.2rem;">
+    <div class="container">
+      <!-- ERA FILTER -->
+      <div class="battle-toolbar" style="margin-bottom:.8rem;">
+        <div class="filter-group" id="eraFilters">
+          <button class="chip active" data-era="all">All Eras</button>
+          <button class="chip" data-era="ancient" style="border-left:3px solid #8B6914;">Ancient & Classical</button>
+          <button class="chip" data-era="maratha" style="border-left:3px solid #CD7F32;">Maratha Empire</button>
+          <button class="chip" data-era="napoleonic" style="border-left:3px solid #4A6741;">Napoleonic Era</button>
+          <button class="chip" data-era="wwii" style="border-left:3px solid var(--signal-red);">World War II</button>
+        </div>
+      </div>
+
+      <!-- THEATRE FILTER (WWII theatres + multi-era) -->
+      <div class="battle-toolbar">
+        <div class="filter-group" id="theatreFilters">
+          <button class="chip active" data-theatre="all">All Theatres</button>
+          <button class="chip" data-theatre="start">Opening of the War</button>
+          <button class="chip" data-theatre="western">Western Front</button>
+          <button class="chip" data-theatre="eastern">Eastern Front</button>
+          <button class="chip" data-theatre="pacific">Pacific</button>
+          <button class="chip" data-theatre="africa">N. Africa &amp; Med.</button>
+          <button class="chip" data-theatre="atlantic">Atlantic</button>
+          <button class="chip" data-theatre="asia">Asia &amp; Burma</button>
+        </div>
+        <div style="display:flex; gap:.7rem; flex-wrap:wrap;">
+          <select class="chip" id="yearFilter" style="font-family:var(--font-mono);">
+            <option value="all">All Years</option>
+          </select>
+          <div class="search-bar" style="background:var(--panel-raised); border-radius:2px;">
+            <input type="text" id="battleSearch" placeholder="Search by name or location…" style="width:220px;">
+          </div>
+        </div>
+      </div>
+
+      <p id="battleCount" style="font-family:var(--font-mono); font-size:.82rem; color:var(--steel); margin-bottom:1.4rem;"></p>
+
+      <div class="battle-grid" id="battleGrid"></div>
+
+      <div class="load-more-wrap" id="loadMoreWrap">
+        <button class="btn btn-outline-dark" id="loadMoreBtn">Load More Battles</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="perforated"></div>
+
+  <!-- COMPARISON TOOL -->
+  <section class="section bg-dark" id="compare">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Battle Comparison Tool</span>
+          <h2>Compare Two Battles</h2>
+          <p class="lede">Select any two featured battles to compare casualties, forces and outcomes side by side.</p>
+        </div>
+      </div>
+      <div class="card compare-panel reveal">
+        <div class="compare-selects">
+          <select id="compareA"></select>
+          <span class="compare-vs">VS</span>
+          <select id="compareB"></select>
+        </div>
+        <div class="compare-result" id="compareResult"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="chrome-footer"></div>
+
+<script src="js/data-battles.js"></script>
+<script src="js/data-operations.js"></script>
+<script src="js/data-leaders.js"></script>
+<script src="js/data-weapons.js"></script>
+<script src="js/data-countries.js"></script>
+<script src="js/data-timeline.js"></script>
+<script src="js/data-resources.js"></script>
+<script src="js/data-forts.js"></script>
+<script src="js/data-maps.js"></script>
+<script src="js/chrome.js"></script>
+<script src="js/battles.js"></script>
+</body>
+</html>

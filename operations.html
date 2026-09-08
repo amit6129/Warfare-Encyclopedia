@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campaigns &amp; Operations Database — March of Empire</title>
+<meta name="description" content="A searchable catalog of major historical military campaigns, expeditions, and operations across three millennia of world history.">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="chrome-top"></div>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a> / Campaigns &amp; Operations</div>
+      <span class="eyebrow">Grand Strategy Ledger</span>
+      <h1 class="display">Campaigns &amp; Operations</h1>
+      <p><strong id="opCountTotal"></strong> named military campaigns, royal expeditions, and strategic operations across three millennia — from Alexander's march into Persia to Operation Overlord in Normandy.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:2.2rem;">
+    <div class="container">
+      <div class="battle-toolbar">
+        <div class="filter-group" id="opTheatreFilters">
+          <button class="chip active" data-theatre="all">All Campaigns</button>
+          <button class="chip" data-theatre="ancient" style="border-left:3px solid #8B6914;">Ancient Campaigns</button>
+          <button class="chip" data-theatre="maratha" style="border-left:3px solid #CD7F32;">Maratha Expeditions</button>
+          <button class="chip" data-theatre="napoleonic" style="border-left:3px solid #4A6741;">Napoleonic Wars</button>
+          <button class="chip" data-theatre="western" style="border-left:3px solid var(--signal-red);">WWII Western Front</button>
+          <button class="chip" data-theatre="eastern" style="border-left:3px solid var(--signal-red);">WWII Eastern Front</button>
+          <button class="chip" data-theatre="pacific" style="border-left:3px solid var(--signal-red);">WWII Pacific</button>
+          <button class="chip" data-theatre="africa" style="border-left:3px solid var(--signal-red);">WWII N. Africa</button>
+        </div>
+        <div class="search-bar" style="background:var(--panel-raised); border-radius:2px;">
+          <input type="text" id="opSearch" placeholder="Search campaigns…" style="width:220px;">
+        </div>
+      </div>
+      <p id="opCount" style="font-family:var(--font-mono); font-size:.82rem; color:var(--steel); margin-bottom:1.4rem;"></p>
+      <div class="battle-grid" id="opGrid"></div>
+    </div>
+  </section>
+</main>
+
+<div id="chrome-footer"></div>
+
+<script src="js/data-battles.js"></script>
+<script src="js/data-operations.js"></script>
+<script src="js/data-leaders.js"></script>
+<script src="js/data-weapons.js"></script>
+<script src="js/data-countries.js"></script>
+<script src="js/data-timeline.js"></script>
+<script src="js/data-resources.js"></script>
+<script src="js/data-forts.js"></script>
+<script src="js/data-maps.js"></script>
+<script src="js/chrome.js"></script>
+<script src="js/operations.js"></script>
+</body>
+</html>

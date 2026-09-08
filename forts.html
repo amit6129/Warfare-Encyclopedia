@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Historical Forts & Fortifications — March of Empire</title>
+<meta name="description" content="Explore historical forts and fortifications — Maratha hill forts of the Sahyadri range, their military significance, architecture and history.">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="chrome-top"></div>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a> / Forts & Fortifications</div>
+      <span class="eyebrow">Military Architecture</span>
+      <h1 class="display">Historical Forts</h1>
+      <p>The fortresses that shaped military strategy across empires — from the hill forts of the Maratha Sahyadri to the coastal bastions of naval warfare.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid" style="gap:2rem;" id="fortsGrid"></div>
+    </div>
+  </section>
+</main>
+
+<div id="chrome-footer"></div>
+
+<script src="js/data-battles.js"></script>
+<script src="js/data-operations.js"></script>
+<script src="js/data-leaders.js"></script>
+<script src="js/data-weapons.js"></script>
+<script src="js/data-countries.js"></script>
+<script src="js/data-timeline.js"></script>
+<script src="js/data-resources.js"></script>
+<script src="js/data-forts.js"></script>
+<script src="js/data-maps.js"></script>
+<script src="js/chrome.js"></script>
+<script>
+document.addEventListener('chrome:ready', ()=>{
+  const grid = document.getElementById('fortsGrid');
+  if(!grid || typeof FORTS === 'undefined') return;
+
+  grid.innerHTML = FORTS.map(f => `
+    <div class="card reveal" id="${f.id}" style="display:grid; grid-template-columns:1fr 1fr; overflow:hidden;">
+      <div style="padding:1.8rem; border-right:4px solid #CD7F32;">
+        <span style="font-family:var(--font-mono); font-size:.65rem; color:#CD7F32; text-transform:uppercase; letter-spacing:.1em;">${f.era ? (f.era === 'maratha' ? 'Maratha Empire' : f.era) : ''} · ${f.elevation}</span>
+        <h2 style="font-size:1.3rem; margin:.4em 0 .3em;">${f.name}</h2>
+        <p style="font-family:var(--font-mono); font-size:.78rem; color:var(--steel); margin-bottom:.8em;">${f.location}</p>
+        <p style="font-size:.88rem; margin-bottom:.6em;"><strong style="color:var(--brass-deep);">Built:</strong> ${f.built}</p>
+        <p style="font-size:.88rem;"><strong style="color:var(--brass-deep);">Military Purpose:</strong> ${f.militaryPurpose}</p>
+      </div>
+      <div style="padding:1.8rem;">
+        <h3 style="font-size:.92rem; color:var(--brass-deep); text-transform:uppercase; letter-spacing:.04em; margin-bottom:.5em;">Historical Significance</h3>
+        <p style="font-size:.88rem; margin-bottom:1em;">${f.significance}</p>
+        <h3 style="font-size:.92rem; color:var(--brass-deep); text-transform:uppercase; letter-spacing:.04em; margin-bottom:.5em;">Architecture</h3>
+        <p style="font-size:.85rem; margin-bottom:.8em;">${f.architecture}</p>
+        ${f.relatedBattles.length ? `<div style="display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.8rem;"><span style="font-family:var(--font-mono); font-size:.65rem; color:var(--steel); text-transform:uppercase; margin-right:.3rem;">Related Battles:</span>${f.relatedBattles.map(id=>`<a href="battles.html#${id}" class="tag tag-brass">${id}</a>`).join('')}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+
+  WW2_UI.initReveal();
+
+  // Scroll to hash
+  const hash = window.location.hash.replace('#','');
+  if(hash){ const el = document.getElementById(hash); if(el) setTimeout(()=> el.scrollIntoView({behavior:'smooth', block:'start'}), 200); }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #07090b;
+    --bg-secondary: #0c0f12;
+    --bg-panel: #11151a;
+    --text-primary: #f3ebd4;
+    --text-muted: #9aa3ab;
+    --accent-brass: #c7a254;
+    --border-color: rgba(199, 162, 84, 0.2);
+  }
+
+  body {
+    background-color: #07090b;
+    color: #f3ebd4;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.02em;
+  }
+
+  h4, h5, .font-heading {
+    font-family: 'Playfair Display', serif;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Custom Archival Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0c0f12;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a333f;
+  border-radius: 2px;
+  border: 1px solid rgba(199, 162, 84, 0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c7a254;
+}
+
+/* Archival Borders & Decorative Dividers */
+.border-archival {
+  border: 1px solid rgba(199, 162, 84, 0.25);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+.border-archival-double {
+  border: 3px double rgba(199, 162, 84, 0.35);
+}
+
+.card-archival {
+  background: linear-gradient(180deg, rgba(22, 27, 33, 0.85) 0%, rgba(12, 15, 18, 0.95) 100%);
+  border: 1px solid rgba(199, 162, 84, 0.2);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.7);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-archival:hover {
+  border-color: rgba(199, 162, 84, 0.5);
+  box-shadow: 0 12px 30px -4px rgba(0, 0, 0, 0.9), 0 0 15px rgba(199, 162, 84, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Archival Ticker Animation */
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-ticker {
+  display: flex;
+  width: max-content;
+  animation: ticker 45s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
+}
+
+/* Vignette overlay */
+.vignette-overlay {
+  background: radial-gradient(circle at center, transparent 40%, rgba(7, 9, 11, 0.85) 100%);
+  pointer-events: none;
+}

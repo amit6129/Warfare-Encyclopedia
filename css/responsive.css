@@ -1,0 +1,90 @@
+/* =========================================================
+   WORLD WAR II ARCHIVE — Responsive Rules
+   Breakpoints: 1200 / 1024 / 860 / 640 / 400
+   ========================================================= */
+
+/* ---- Large laptop / small desktop ---- */
+@media (max-width: 1200px){
+  .header-stats{ grid-template-columns: repeat(3, 1fr); }
+  .stat-box:nth-child(n+4){ border-top:1px solid var(--olive-line); }
+}
+
+/* ---- Tablet landscape / small laptop ---- */
+@media (max-width: 1024px){
+  .battle-grid{ grid-template-columns: repeat(2, 1fr); }
+  .overview-split{ grid-template-columns: 1fr; }
+  .footer-grid{ grid-template-columns: 1fr 1fr; }
+  .grid-4{ grid-template-columns: repeat(2,1fr); }
+  .grid-3{ grid-template-columns: repeat(2,1fr); }
+}
+
+/* ---- Tablet portrait ---- */
+@media (max-width: 860px){
+  .search-bar{ display:none; }
+  .nav-links{ display:none; }
+  .nav-toggle{ display:flex; }
+
+  .nav-links.open{
+    display:flex; flex-direction:column; align-items:stretch;
+    position:fixed; inset: var(--nav-height) 0 0 0; background: var(--ink);
+    padding: 1.5rem; gap:.2rem; overflow-y:auto; z-index:300;
+  }
+  .nav-links.open a{ padding:1em .5em; border-bottom:1px solid var(--olive-line); }
+
+  .header-main{ flex-direction:column; align-items:flex-start; }
+  .header-quicklinks{ align-items:flex-start; width:100%; }
+  .header-stats{ grid-template-columns: repeat(2, 1fr); }
+  .stat-box{ border-top:1px solid var(--olive-line); }
+
+  .belligerents{ grid-template-columns: 1fr; }
+  .casualty-row{ flex-wrap:wrap; gap:.8rem 1.4rem; }
+
+  .footer-grid{ grid-template-columns: 1fr 1fr; gap:1.6rem; }
+}
+
+/* ---- Mobile (phones, landscape & large) ---- */
+@media (max-width: 640px){
+  html{ font-size: 98%; }
+  .battle-grid, .grid-2, .grid-3, .grid-4{ grid-template-columns: 1fr; }
+  .header-stats{ grid-template-columns: repeat(2, 1fr); }
+  .footer-grid{ grid-template-columns: 1fr; gap:1.8rem; }
+  .footer-bottom{ flex-direction:column; text-align:center; }
+  .section-head{ flex-direction:column; align-items:flex-start; }
+  .battle-toolbar{ flex-direction:column; align-items:stretch; }
+  .filter-group{ justify-content:flex-start; }
+  .overview-figures{ gap:.8rem; }
+  .top-bar-label{ display:none; }
+  .brand-area h1{ font-size: clamp(2.1rem, 11vw, 2.8rem); }
+  .figure-card{ flex-direction:column; text-align:center; }
+  .data-table{ font-size:.8rem; }
+}
+
+/* ---- Small phones ---- */
+@media (max-width: 400px){
+  .header-stats{ grid-template-columns: 1fr 1fr; }
+  .stat-box{ padding:.9rem .6rem; }
+  .container{ padding-inline: .9rem; }
+  .battle-body{ padding:1.15rem 1.1rem 1.3rem; }
+  .btn{ width:100%; }
+  .hero-cta{ flex-direction:column; }
+}
+
+/* ---- Large desktop refinement ---- */
+@media (min-width: 1440px){
+  .container{ max-width: 1360px; }
+}
+
+/* ---- Encyclopedia extensions ---- */
+@media (max-width: 1024px){
+  .spotlight-grid{ grid-template-columns: 1fr; }
+}
+@media (max-width: 860px){
+  .compare-selects{ grid-template-columns: 1fr; }
+  .compare-vs{ display:none; }
+  .compare-result{ grid-template-columns: 1fr; }
+  .modal-body{ padding: 1.4rem 1.3rem 1.8rem; }
+}
+@media (max-width: 640px){
+  .leader-card{ flex-direction:column; text-align:center; align-items:center; }
+  .search-overlay-box input{ font-size:1.3rem; }
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weapons &amp; Military Technology — March of Empire</title>
+<meta name="description" content="Armaments, siege engines, swords, firearms, tanks, warships, and combat aircraft across historical eras with technical specifications and side-by-side comparisons.">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="chrome-top"></div>
+
+<main id="main">
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a> / Materiel &amp; Technology</div>
+      <span class="eyebrow">Evolution of War Materiel</span>
+      <h1 class="display">Weapons &amp; Technology</h1>
+      <p>From Macedonian pikes and Maratha gauntlet swords to Napoleonic grand batteries and WWII armour: inspect technical specifications, operational doctrine, and compare arms side by side.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:2.2rem;">
+    <div class="container">
+      <div class="category-tabs" id="categoryTabs" style="margin-bottom:2rem;">
+        <button class="chip active" data-category="ancient" style="border-left:3px solid #8B6914;">Ancient &amp; Classical</button>
+        <button class="chip" data-category="maratha" style="border-left:3px solid #CD7F32;">Maratha &amp; Indian</button>
+        <button class="chip" data-category="napoleonic" style="border-left:3px solid #4A6741;">Napoleonic Era</button>
+        <button class="chip" data-category="tanks" style="border-left:3px solid var(--signal-red);">WWII Tanks</button>
+        <button class="chip" data-category="aircraft" style="border-left:3px solid var(--signal-red);">WWII Aircraft</button>
+        <button class="chip" data-category="naval" style="border-left:3px solid var(--signal-red);">Naval Vessels</button>
+        <button class="chip" data-category="smallArms" style="border-left:3px solid var(--signal-red);">WWII Firearms</button>
+      </div>
+
+      <div class="grid grid-3" id="weaponGrid"></div>
+    </div>
+  </section>
+
+  <div class="perforated"></div>
+
+  <section class="section bg-dark">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Technical Comparison</span>
+          <h2>Compare Specifications</h2>
+          <p class="lede">Select any two items from the active category to compare specifications, deployment roles, and lethality metrics side by side.</p>
+        </div>
+      </div>
+      <div class="card compare-panel reveal">
+        <div class="compare-selects">
+          <select id="weaponCompareA"></select>
+          <span class="compare-vs">VS</span>
+          <select id="weaponCompareB"></select>
+        </div>
+        <div class="compare-result" id="weaponCompareResult"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="chrome-footer"></div>
+
+<script src="js/data-battles.js"></script>
+<script src="js/data-operations.js"></script>
+<script src="js/data-leaders.js"></script>
+<script src="js/data-weapons.js"></script>
+<script src="js/data-countries.js"></script>
+<script src="js/data-timeline.js"></script>
+<script src="js/data-resources.js"></script>
+<script src="js/data-forts.js"></script>
+<script src="js/data-maps.js"></script>
+<script src="js/chrome.js"></script>
+<script src="js/weapons.js"></script>
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Commander Dossier — March of Empire</title>
+<meta name="description" content="In-depth military biography, command doctrine, notable battles, tactical innovations, and strategic legacy.">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/responsive.css">
+<style>
+.dossier-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+.commander-sidebar {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  position: sticky;
+  top: 90px;
+}
+.portrait-banner {
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-bottom: 1px solid var(--border);
+}
+.portrait-initials {
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: .05em;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+}
+.dossier-meta-table {
+  padding: 1.2rem;
+}
+.meta-row {
+  display: flex;
+  justify-content: space-between;
+  padding: .65rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: .88rem;
+}
+.meta-row:last-child { border-bottom: none; }
+.meta-label { color: var(--steel); font-family: var(--font-mono); font-size: .78rem; text-transform: uppercase; }
+.meta-val { font-weight: 600; text-align: right; color: var(--fg); }
+
+.doctrine-box {
+  background: var(--panel-raised);
+  border-left: 3px solid var(--brass);
+  padding: 1.2rem 1.5rem;
+  border-radius: 0 4px 4px 0;
+  margin: 1.5rem 0;
+}
+
+.battle-tag-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: .85rem 1.2rem;
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--fg);
+  transition: all .2s;
+}
+.battle-tag-link:hover {
+  border-color: var(--brass);
+  transform: translateX(4px);
+  background: var(--panel-raised);
+}
+
+@media(max-width: 880px) {
+  .dossier-layout { grid-template-columns: 1fr; }
+  .commander-sidebar { position: static; }
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div id="chrome-top"></div>
+
+<main id="main">
+  <div id="commanderContent">
+    <!-- Populated by JS -->
+    <section class="page-hero">
+      <div class="container">
+        <p style="color:var(--steel); font-family:var(--font-mono);">Loading commander dossier…</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div id="chrome-footer"></div>
+
+<script src="js/data-battles.js"></script>
+<script src="js/data-operations.js"></script>
+<script src="js/data-leaders.js"></script>
+<script src="js/data-weapons.js"></script>
+<script src="js/data-countries.js"></script>
+<script src="js/data-timeline.js"></script>
+<script src="js/data-resources.js"></script>
+<script src="js/data-forts.js"></script>
+<script src="js/data-maps.js"></script>
+<script src="js/chrome.js"></script>
+<script>
+document.addEventListener('chrome:ready', () => {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  const leader = (typeof LEADERS !== 'undefined') ? LEADERS.find(l => l.id === id) : null;
+  const container = document.getElementById('commanderContent');
+
+  if (!leader) {
+    document.title = "Commanders Dossier — March of Empire";
+    container.innerHTML = `
+      <section class="page-hero">
+        <div class="container">
+          <div class="breadcrumb"><a href="index.html">Home</a> / <a href="leaders.html">Commanders</a> / Dossiers</div>
+          <span class="eyebrow">High Command</span>
+          <h1 class="display">Commander Profiles</h1>
+          <p>Explore encyclopedic dossiers on the world's most consequential military commanders and strategists across three millennia of warfare.</p>
+        </div>
+      </section>
+      <section class="section">
+        <div class="container">
+          <h2 style="font-size:1.3rem; margin-bottom:1.5rem; text-transform:uppercase; letter-spacing:0.06em;">Featured Military Figures</h2>
+          <div class="grid grid-3">
+            ${(typeof LEADERS !== 'undefined' ? LEADERS : []).map(l => `
+              <a href="commander-detail.html?id=${l.id}" class="card" style="text-decoration:none; display:flex; gap:1rem; padding:1.2rem; align-items:center; transition:all .2s;">
+                <div style="width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg, ${l.color||'#333'}, #111); display:flex; align-items:center; justify-content:center; font-weight:700; color:#fff; font-size:1.1rem; flex-shrink:0;">${l.initials}</div>
+                <div>
+                  <h3 style="font-size:1rem; margin:0 0 .2rem; color:var(--fg);">${l.name}</h3>
+                  <p style="font-size:.78rem; color:var(--steel); margin:0;">${l.nation} &middot; ${l.role}</p>
+                </div>
+              </a>
+            `).join('')}
+          </div>
+          <div style="margin-top:2rem; text-align:center;">
+            <a href="leaders.html" class="btn btn-outline-dark">Return to Commanders Index</a>
+          </div>
+        </div>
+      </section>
+    `;
+    return;
+  }
+
+  // Update Page Title
+  document.title = `${leader.name} — Commander Dossier | March of Empire`;
+
+  // Era determination
+  let eraName = "World War II";
+  let eraBadgeClass = "tag-red";
+  if (leader.era === 'ancient') {
+    eraName = "Ancient & Classical";
+    eraBadgeClass = "tag-brass";
+  } else if (leader.era === 'maratha') {
+    eraName = "Maratha Empire";
+    eraBadgeClass = "tag-brass";
+  } else if (leader.era === 'napoleonic') {
+    eraName = "Napoleonic Era";
+    eraBadgeClass = "tag-brass";
+  }
+
+  // Find associated battles
+  const associatedBattles = (typeof BATTLES !== 'undefined') ? BATTLES.filter(b => {
+    const rawCmdrs = JSON.stringify(b.commanders || {}).toLowerCase();
+    const rawSumm = (b.summary || '' + b.outcome || '').toLowerCase();
+    const query = leader.name.toLowerCase().split(' ').pop(); // last name
+    return rawCmdrs.includes(query) || rawCmdrs.includes(leader.id) || (b.name.toLowerCase().includes(leader.id));
+  }) : [];
+
+  // Find associated campaigns
+  const associatedOps = (typeof OPERATIONS !== 'undefined') ? OPERATIONS.filter(op => {
+    const raw = JSON.stringify(op).toLowerCase();
+    const query = leader.name.toLowerCase().split(' ').pop();
+    return raw.includes(query) || raw.includes(leader.id);
+  }) : [];
+
+  // Doctrine synthesis based on figure
+  let doctrineSnippet = "Rigorous operational planning, coordinated front-line command, and combined arms deployment.";
+  if (leader.id === 'alexander') {
+    doctrineSnippet = "Hammer-and-Anvil doctrine: The impenetrable Macedonian pike phalanx pinned the enemy center while Alexander personally led the Companion heavy cavalry in decisive flank shock charges.";
+  } else if (leader.id === 'shivaji') {
+    doctrineSnippet = "Ganimi Kava (Guerrilla doctrine): Leveraging the rugged Western Ghats terrain, lightning mountain cavalry ambushes, rapid hill fort retreats, and strategic naval fort blockades to defeat vastly larger imperial armies.";
+  } else if (leader.id === 'napoleon') {
+    doctrineSnippet = "Corps d'Armée system: Dividing the army into self-sustaining, semi-independent corps that marched separately for speed, converging rapidly to achieve overwhelming local numerical superiority at the critical point.";
+  } else if (leader.id === 'hannibal') {
+    doctrineSnippet = "Double Envelopment: Allowing his center to yield intentionally under pressure while his superior cavalry crushed the enemy flanks and surrounded the Roman legions.";
+  } else if (leader.id === 'caesar') {
+    doctrineSnippet = "Celeritas (Extreme Speed) & Tactical Engineering: Forcing engagements before the enemy was prepared, supplemented by Roman legionary field engineering, counter-circumvallation, and disciplined reserve cohorts.";
+  } else if (leader.id === 'rommel') {
+    doctrineSnippet = "Führung von vorne (Leading from the front): Rapid tank manoeuvre warfare, bold bypass of enemy strongpoints, and sudden flank strikes in the North African desert.";
+  } else if (leader.id === 'zhukov') {
+    doctrineSnippet = "Deep Battle Doctrine: Massed artillery preparation followed by simultaneous rupture of tactical and operational defensive zones, exploiting breakthroughs with mobile tank corps.";
+  } else if (leader.id === 'nelson') {
+    doctrineSnippet = "Pell-mell Battle & Breaking the Line: Discarding the conventional rigid line-of-battle; instead attacking the enemy fleet perpendicular in two columns to isolate segments in close-range decisive combat.";
+  }
+
+  container.innerHTML = `
+    <!-- HERO -->
+    <section class="page-hero" style="border-bottom:1px solid var(--border); padding-bottom:2rem;">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="index.html">Home</a> / <a href="leaders.html">Leaders &amp; Commanders</a> / ${leader.name}
+        </div>
+        <div style="display:flex; gap:.6rem; align-items:center; margin-bottom:.7rem;">
+          <span class="tag ${eraBadgeClass}" style="font-size:.75rem;">${eraName}</span>
+          <span class="tag ${leader.side==='allied'||leader.side==='rome'||leader.side==='macedon'||leader.side==='maratha'||leader.side==='france'?'tag-brass':'tag-red'}" style="font-size:.75rem;">
+            ${leader.nation}
+          </span>
+          <span class="tag tag-steel" style="font-size:.75rem; text-transform:capitalize;">${leader.category}</span>
+        </div>
+        <h1 class="display" style="font-size:clamp(2.2rem, 4vw, 3.2rem); margin-bottom:.4rem;">${leader.name}</h1>
+        <p class="role" style="font-family:var(--font-mono); font-size:1.05rem; color:var(--brass); margin-bottom:.5rem;">${leader.role}</p>
+        ${leader.title ? `<p style="font-size:.92rem; color:var(--sand); margin:0;"><strong>Imperial Title:</strong> ${leader.title}</p>` : ''}
+      </div>
+    </section>
+
+    <!-- MAIN DOSSIER LAYOUT -->
+    <section class="section" style="padding-top:2.2rem;">
+      <div class="container">
+        <div class="dossier-layout">
+          <!-- SIDEBAR -->
+          <aside class="commander-sidebar">
+            <div class="portrait-banner" style="background:linear-gradient(150deg, ${leader.color || '#3D6E85'}, #0a0c0f);">
+              <div class="portrait-initials">${leader.initials}</div>
+              <span style="font-size:.78rem; font-family:var(--font-mono); color:rgba(255,255,255,0.7); text-transform:uppercase; letter-spacing:.08em; margin-top:.5rem;">High Command Record</span>
+            </div>
+            <div class="dossier-meta-table">
+              <div class="meta-row">
+                <span class="meta-label">Faction / Nation</span>
+                <span class="meta-val">${leader.nation}</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-label">Alignment</span>
+                <span class="meta-val" style="text-transform:capitalize;">${leader.side}</span>
+              </div>
+              ${leader.birth ? `
+                <div class="meta-row">
+                  <span class="meta-label">Born</span>
+                  <span class="meta-val">${leader.birth}</span>
+                </div>
+              ` : ''}
+              ${leader.death ? `
+                <div class="meta-row">
+                  <span class="meta-label">Died</span>
+                  <span class="meta-val">${leader.death}</span>
+                </div>
+              ` : ''}
+              <div class="meta-row">
+                <span class="meta-label">Era</span>
+                <span class="meta-val">${eraName}</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-label">Classification</span>
+                <span class="meta-val" style="text-transform:capitalize;">${leader.category}</span>
+              </div>
+            </div>
+
+            <div style="padding:1rem 1.2rem; border-top:1px solid var(--border); background:var(--panel-raised);">
+              <a href="leaders.html" class="btn btn-outline-dark" style="width:100%; text-align:center; font-size:.82rem;">
+                &larr; Return to Commanders
+              </a>
+            </div>
+          </aside>
+
+          <!-- MAIN CONTENT BODY -->
+          <div>
+            <!-- BIOGRAPHY -->
+            <div class="card" style="padding:2rem; margin-bottom:2rem;">
+              <h2 style="font-size:1.35rem; margin-bottom:1rem; border-bottom:1px solid var(--border); padding-bottom:.5rem;">
+                Historical Biography &amp; Service Record
+              </h2>
+              <p style="font-size:1.02rem; line-height:1.75; color:var(--sand); margin-bottom:1.5rem;">
+                ${leader.bio}
+              </p>
+
+              <!-- STRATEGIC DOCTRINE -->
+              <div class="doctrine-box">
+                <h3 style="font-size:1rem; font-family:var(--font-mono); text-transform:uppercase; color:var(--brass); letter-spacing:.08em; margin-bottom:.4rem;">
+                  Command Doctrine &amp; Tactical Innovation
+                </h3>
+                <p style="font-size:.94rem; line-height:1.65; color:var(--fg); margin:0;">
+                  ${doctrineSnippet}
+                </p>
+              </div>
+            </div>
+
+            <!-- ASSOCIATED BATTLES -->
+            <div class="card" style="padding:2rem; margin-bottom:2rem;">
+              <h2 style="font-size:1.25rem; margin-bottom:1rem; border-bottom:1px solid var(--border); padding-bottom:.5rem;">
+                Documented Engagements &amp; Battles
+              </h2>
+              <p style="font-size:.86rem; color:var(--steel); margin-bottom:1.2rem;">
+                Key military engagements featuring direct command oversight or high tactical influence:
+              </p>
+              ${associatedBattles.length ? `
+                <div style="display:flex; flex-direction:column; gap:.8rem;">
+                  ${associatedBattles.map(b => `
+                    <a href="battle-detail.html?id=${b.id}" class="battle-tag-link">
+                      <div>
+                        <strong style="font-size:.95rem; display:block;">${b.name}</strong>
+                        <span style="font-size:.76rem; color:var(--steel); font-family:var(--font-mono);">${b.dates} &middot; ${b.location}</span>
+                      </div>
+                      <span class="btn btn-outline-dark btn-sm" style="pointer-events:none;">View Dossier &rarr;</span>
+                    </a>
+                  `).join('')}
+                </div>
+              ` : `
+                <p style="font-size:.9rem; color:var(--steel); font-style:italic;">
+                  Direct battle records indexed in the campaign ledger. Browse the complete <a href="battles.html" style="color:var(--brass); text-decoration:underline;">Battles Encyclopedia</a>.
+                </p>
+              `}
+            </div>
+
+            <!-- ASSOCIATED CAMPAIGNS -->
+            ${associatedOps.length ? `
+              <div class="card" style="padding:2rem;">
+                <h2 style="font-size:1.25rem; margin-bottom:1rem; border-bottom:1px solid var(--border); padding-bottom:.5rem;">
+                  Major Campaigns &amp; Strategic Operations
+                </h2>
+                <div style="display:flex; flex-direction:column; gap:.8rem;">
+                  ${associatedOps.map(op => `
+                    <div style="background:var(--panel); border:1px solid var(--border); padding:1rem 1.2rem; border-radius:4px;">
+                      <span style="font-size:.74rem; font-family:var(--font-mono); color:var(--brass);">${op.dates || op.year} &middot; ${op.theatre || ''}</span>
+                      <h4 style="font-size:1rem; margin:.2rem 0 .4rem;">${op.name}</h4>
+                      <p style="font-size:.85rem; color:var(--sand); margin:0;">${op.objective || op.summary || ''}</p>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+
+  if (typeof WW2_UI !== 'undefined' && WW2_UI.initReveal) {
+    WW2_UI.initReveal();
+  }
+});
+</script>
+</body>
+</html>

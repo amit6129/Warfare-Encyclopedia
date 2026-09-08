@@ -1,0 +1,28 @@
+/* =========================================================
+   WWII ENCYCLOPEDIA — Countries of WWII
+   ========================================================= */
+
+import { Country } from "../types";
+
+export const COUNTRIES: any[] = [
+  { id: "uk", name: "United Kingdom", side: "allied", leader: "Winston Churchill", mobilised: "~6,000,000", role: "Led Western Allied resistance from 1939, hosting the buildup for D-Day and directing the Battle of Britain and Battle of the Atlantic." },
+  { id: "usa", name: "United States", side: "allied", leader: "Franklin D. Roosevelt", mobilised: "~16,000,000", role: "Entered the war after Pearl Harbor in Dec 1941, becoming the primary industrial and military engine of the Allied war effort in both Europe and the Pacific." },
+  { id: "ussr", name: "Soviet Union", side: "allied", leader: "Joseph Stalin", mobilised: "~34,000,000", role: "Bore the brunt of the land war against Germany from 1941, suffering the highest casualties of any nation and ultimately capturing Berlin." },
+  { id: "china-ally", name: "China (Republic of China)", side: "allied", leader: "Chiang Kai-shek", mobilised: "~14,000,000", role: "Fought Japan continuously from 1937, tying down large Japanese forces on the Asian mainland throughout the war." },
+  { id: "france-ally", name: "France", side: "allied", leader: "Charles de Gaulle (Free France)", mobilised: "~5,000,000", role: "Defeated and occupied in 1940; Free French forces continued fighting alongside the Allies, and the resistance aided the 1944 liberation." },
+  { id: "canada", name: "Canada", side: "allied", leader: "William Lyon Mackenzie King", mobilised: "~1,100,000", role: "Contributed major naval, air and ground forces, including a leading role in the Battle of the Atlantic and the D-Day landings." },
+  { id: "australia", name: "Australia", side: "allied", leader: "John Curtin", mobilised: "~1,000,000", role: "Fought in North Africa, the Mediterranean and extensively in the Pacific, including the defence of New Guinea." },
+  { id: "poland-ally", name: "Poland", side: "allied", leader: "Władysław Sikorski (government-in-exile)", mobilised: "~1,000,000", role: "Invaded in September 1939, triggering the war's start; Polish forces and resistance continued fighting from exile and underground throughout the war." },
+  { id: "india-ally", name: "British India", side: "allied", leader: "Viceroy Archibald Wavell (colonial administration)", mobilised: "~2,500,000", role: "Provided the largest volunteer force in history to the British war effort, fighting across North Africa, Italy and Burma." },
+  { id: "netherlands-ally", name: "Netherlands", side: "allied", leader: "Queen Wilhelmina (government-in-exile)", mobilised: "~500,000", role: "Occupied in 1940 after a brief campaign; the Dutch resistance and government-in-exile continued to support the Allied cause." },
+  { id: "germany", name: "Germany", side: "axis", leader: "Adolf Hitler", mobilised: "~18,000,000", role: "Initiated the war in Europe with the invasion of Poland and led the Axis powers until its unconditional surrender in May 1945." },
+  { id: "japan", name: "Japan", side: "axis", leader: "Emperor Hirohito / Hideki Tojo", mobilised: "~6,000,000-9,000,000", role: "Expanded across East Asia and the Pacific from 1931, attacking Pearl Harbor in 1941 and surrendering in August 1945 after the atomic bombings." },
+  { id: "italy", name: "Italy", side: "axis", leader: "Benito Mussolini", mobilised: "~4,000,000-5,500,000", role: "Joined Germany in 1940, fighting in North Africa, Greece and the Eastern Front before surrendering to the Allies in September 1943." },
+  { id: "romania", name: "Romania", side: "axis", leader: "Ion Antonescu", mobilised: "~1,200,000", role: "Fought alongside Germany on the Eastern Front, particularly at Stalingrad, before switching to the Allied side in August 1944." },
+  { id: "hungary", name: "Hungary", side: "axis", leader: "Miklós Horthy", mobilised: "~1,000,000", role: "Allied with Germany and contributed forces to the Eastern Front, occupied by Germany in 1944 after attempting to negotiate an armistice." },
+  { id: "finland", name: "Finland", side: "axis", leader: "Carl Gustaf Emil Mannerheim", mobilised: "~640,000", role: "Fought the Soviet Union in the Winter War (1939-40) and again as a co-belligerent with Germany from 1941 to 1944." },
+  { id: "switzerland", name: "Switzerland", side: "neutral", leader: "Federal Council", mobilised: "~450,000 (defensive mobilisation)", role: "Maintained armed neutrality throughout the war while surrounded by Axis territory, though its wartime financial dealings remain historically debated." },
+  { id: "sweden", name: "Sweden", side: "neutral", leader: "King Gustaf V", mobilised: "~300,000 (defensive mobilisation)", role: "Remained neutral while trading iron ore with Germany and later providing refuge to Scandinavian and Jewish refugees." },
+  { id: "spain", name: "Spain", side: "neutral", leader: "Francisco Franco", mobilised: "N/A (officially neutral)", role: "Remained formally neutral despite ideological sympathy with the Axis, though it sent the volunteer Blue Division to fight on the Eastern Front." },
+  { id: "turkey", name: "Turkey", side: "neutral", leader: "İsmet İnönü", mobilised: "~800,000-1,000,000", role: "Remained neutral for most of the war, only formally declaring war on Germany and Japan in February 1945." }
+];

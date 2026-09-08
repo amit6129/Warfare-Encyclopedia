@@ -1,0 +1,248 @@
+/* =========================================================
+   WORLD WAR II ARCHIVE — Design Tokens & Base Styles
+   Direction: "War Room Dossier" — blackout situation-room
+   darkness, olive drab, brass insignia, parchment dossier
+   panels, stencilled headlines, typewriter data.
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Courier+Prime:wght@400;700&display=swap');
+
+:root{
+  /* ---- Colour tokens ---- */
+  --ink:            #14171A;   /* blackout background */
+  --panel:          #1B1F1B;   /* dark panel, olive undertone */
+  --panel-raised:   #232920;   /* raised dark panel / hover */
+  --olive:          #4B5320;   /* military olive drab */
+  --olive-light:    #6B7A34;   /* lighter olive accent */
+  --olive-line:     #35401f;   /* hairline on dark */
+  --brass:          #C7A254;   /* insignia brass — primary accent */
+  --brass-light:    #E4C878;
+  --brass-deep:     #8F7439;
+  --parchment:      #EFE8D6;   /* dossier paper — light background */
+  --parchment-dim:  #E4DAC0;
+  --paper:          #FAF6EB;
+  --signal-red:     #B23A2E;   /* stamps, front-line, alerts */
+  --signal-red-dim: #7C2A21;
+  --steel:          #5C6670;   /* muted text on dark */
+  --pacific:        #3D6E85;   /* Pacific theatre accent */
+  --sand:           #9C8348;   /* North Africa / Mediterranean accent */
+  --ink-text:       #201D16;   /* body text on light */
+  --cream-text:     #EDE7D8;   /* text on dark */
+  --muted-dark:     #9AA08C;   /* muted text on dark panels */
+
+  /* ---- Type ---- */
+  --font-display: 'Bebas Neue', 'Oswald', sans-serif;
+  --font-head: 'Oswald', sans-serif;
+  --font-body: 'Source Serif 4', Georgia, serif;
+  --font-mono: 'Courier Prime', 'Courier New', monospace;
+
+  /* ---- Layout ---- */
+  --max-width: 1280px;
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --shadow-sm: 0 2px 10px rgba(0,0,0,.25);
+  --shadow-md: 0 14px 34px rgba(0,0,0,.35);
+  --nav-height: 68px;
+  --transition: 200ms cubic-bezier(.4,0,.2,1);
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; font-size: 106%; }
+
+body{
+  margin:0;
+  font-family: var(--font-body);
+  background: var(--parchment);
+  color: var(--ink-text);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+ul{ list-style:none; margin:0; padding:0; }
+button{ font-family:inherit; cursor:pointer; }
+input, select{ font-family:inherit; }
+
+::selection{ background: var(--brass); color: var(--ink); }
+
+::-webkit-scrollbar{ width:11px; height:11px; }
+::-webkit-scrollbar-track{ background: var(--parchment-dim); }
+::-webkit-scrollbar-thumb{ background: var(--olive); border-radius: 2px; border:2px solid var(--parchment-dim); }
+::-webkit-scrollbar-thumb:hover{ background: var(--brass-deep); }
+
+/* ---- Typography scale ---- */
+h1,h2,h3,h4{
+  font-family: var(--font-head);
+  color: var(--ink-text);
+  line-height: 1.15;
+  margin: 0 0 .5em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .01em;
+}
+.display{
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: .04em;
+  line-height: 1;
+}
+h1{ font-size: clamp(2.2rem, 6vw, 4.4rem); }
+h2{ font-size: clamp(1.6rem, 3.4vw, 2.4rem); }
+h3{ font-size: clamp(1.15rem, 2vw, 1.4rem); }
+p{ font-size: 1rem; line-height: 1.75; color: var(--ink-text); margin: 0 0 1em; }
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:.6em;
+  font-family: var(--font-mono);
+  font-size:.74rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color: var(--brass-deep);
+  font-weight:700;
+}
+.eyebrow::before{ content:"◆"; font-size:.65em; color: var(--signal-red); }
+.bg-dark .eyebrow{ color: var(--brass); }
+
+/* ---- Layout helpers ---- */
+.container{
+  max-width: var(--max-width);
+  margin-inline:auto;
+  padding-inline: clamp(1rem, 4vw, 2.25rem);
+}
+.section{ padding: clamp(2.75rem, 6vw, 5.5rem) 0; }
+.section-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:1.5rem;
+  margin-bottom: 2.25rem;
+  flex-wrap:wrap;
+}
+.section-head h2{ margin:.3em 0 0; }
+.section-head .lede{ max-width:560px; margin-top:.5em; font-size:1.02rem; }
+
+.bg-dark{ background: var(--panel); color: var(--cream-text); }
+.bg-dark p{ color: var(--muted-dark); }
+.bg-dark h1, .bg-dark h2, .bg-dark h3{ color: var(--cream-text); }
+
+/* ---- Perforated / torn paper divider (signature texture) ---- */
+.perforated{
+  height: 14px;
+  width:100%;
+  background-image: radial-gradient(circle, var(--ink) 3px, transparent 3.5px);
+  background-size: 20px 14px;
+  background-position: center;
+  background-repeat: repeat-x;
+}
+.perforated.on-light{ background-image: radial-gradient(circle, var(--parchment) 3px, transparent 3.5px); }
+
+/* ---- Buttons ---- */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.6em;
+  padding: .85em 1.8em;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-head);
+  font-weight:600;
+  font-size:.92rem;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  border:1.5px solid transparent;
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition), border-color var(--transition);
+}
+.btn-brass{
+  background: linear-gradient(180deg, var(--brass-light), var(--brass));
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+}
+.btn-brass:hover{ transform: translateY(-2px); box-shadow: 0 10px 26px rgba(199,162,84,.35); }
+
+.btn-outline{
+  background: transparent;
+  border-color: rgba(237,231,216,.35);
+  color: var(--cream-text);
+}
+.btn-outline:hover{ border-color: var(--brass); color: var(--brass); }
+
+.btn-outline-dark{
+  background: transparent;
+  border-color: var(--olive);
+  color: var(--ink-text);
+}
+.btn-outline-dark:hover{ border-color: var(--signal-red); color: var(--signal-red-dim); }
+
+.btn-sm{ padding:.55em 1.2em; font-size:.78rem; }
+
+/* ---- Stamp badge (signature element) ---- */
+.stamp{
+  display:inline-block;
+  border: 2px solid var(--signal-red);
+  color: var(--signal-red);
+  font-family: var(--font-head);
+  font-weight:700;
+  font-size:.68rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  padding:.3em .7em;
+  border-radius: 2px;
+  transform: rotate(-4deg);
+  opacity:.9;
+}
+
+/* ---- Cards / panels ---- */
+.card{
+  background: var(--paper);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(20,23,26,.08);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.card:hover{ transform: translateY(-4px); box-shadow: var(--shadow-md); }
+
+.tag{
+  display:inline-block;
+  font-family: var(--font-mono);
+  font-size:.7rem;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  padding:.28em .75em;
+  border-radius: 2px;
+  background: var(--parchment-dim);
+  color: var(--steel);
+  font-weight:700;
+}
+.tag-brass{ background: rgba(199,162,84,.16); color: var(--brass-deep); }
+.tag-red{ background: rgba(178,58,46,.12); color: var(--signal-red); }
+.bg-dark .tag{ background: var(--panel-raised); color: var(--muted-dark); }
+.bg-dark .tag-brass{ background: rgba(199,162,84,.15); color: var(--brass); }
+
+/* ---- Grid helpers ---- */
+.grid{ display:grid; gap:1.6rem; }
+.grid-2{ grid-template-columns: repeat(2,1fr); }
+.grid-3{ grid-template-columns: repeat(3,1fr); }
+.grid-4{ grid-template-columns: repeat(4,1fr); }
+
+.reveal{ opacity:0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in-view{ opacity:1; transform:none; }
+
+.skip-link{
+  position:absolute; left:-999px; top:0;
+  background: var(--brass); color:var(--ink);
+  padding:.8em 1.2em; z-index:999; border-radius: 0 0 6px 0;
+  font-family: var(--font-head); font-weight:700; text-transform:uppercase;
+}
+.skip-link:focus{ left:0; }
+
+:focus-visible{ outline: 2.5px solid var(--brass); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+}
